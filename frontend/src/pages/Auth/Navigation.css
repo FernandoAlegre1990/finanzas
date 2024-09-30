@@ -1,0 +1,106 @@
+#navigation-container {
+    width: 4%;
+    transition: width 0.3s ease-in-out;
+    overflow: hidden; /* Oculta el contenido que desborda durante la transición */
+    background-color: #1a1a1a; /* Fondo oscuro */
+    height: 100vh; /* Ocupar la altura completa de la pantalla */
+    position: fixed; /* Mantener el menú fijo */
+    z-index: 9999; /* Asegurar que esté por encima de otros elementos */
+}
+
+#navigation-container:hover {
+    width: 15%; /* Expandir al pasar el ratón */
+}
+
+.nav-item-name {
+    display: none;
+    transition: opacity 0.2s ease-in-out; /* Transición suave de opacidad */
+    font-size: 16px;
+    margin-left: 10px;
+    color: #fff; /* Texto blanco para contraste */
+}
+
+#navigation-container:hover .nav-item-name {
+    display: block;
+    opacity: 1;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    padding-left: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.nav-item:hover {
+    transform: translateX(10px); /* Desplazamiento a la derecha al pasar el ratón */
+}
+
+.nav-item svg {
+    color: #ffffff;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-item:hover svg {
+    color: #ffcc00; /* Cambio de color del ícono al pasar el ratón */
+}
+
+.search-input {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+#navigation-container:hover .search-input {
+    display: block;
+    opacity: 1;
+}
+
+.search-icon {
+    transition: opacity 0.2s ease-in-out;
+}
+
+#navigation-container:hover .search-icon {
+    display: none;
+}
+
+.dropdown {
+    position: relative;
+    background-color: #333; /* Fondo oscuro para el dropdown */
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.dropdown ul {
+    position: absolute;
+    background-color: #444;
+    right: 0;
+    margin-top: 5px;
+    padding: 10px;
+    list-style: none;
+    border-radius: 8px;
+}
+
+.dropdown ul li {
+    padding: 10px;
+    margin-bottom: 5px;
+    background-color: #555;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown ul li:hover {
+    background-color: #666;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    color: #ffcc00; /* Color del texto del botón al pasar el ratón */
+}
