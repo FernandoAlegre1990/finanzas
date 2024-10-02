@@ -1,5 +1,6 @@
-import { apiSlice } from "./apiSlice";
+import { apiSlice, resetApiState } from "./apiSlice";
 import { USERS_URL } from "../constants";
+import { logout as logoutAction } from '../features/auth/authSlice'; // Importa la acción de logout de tu authSlice
 
 export const userApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -22,16 +23,23 @@ export const userApiSlice = apiSlice.injectEndpoints({
           url: `${USERS_URL}/logout`,
           method: "POST",
         }),
+        async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+          try {
+            await queryFulfilled;
+            dispatch(logoutAction()); // Despacha la acción de logout para limpiar el estado de Redux
+            dispatch(resetApiState()); // Reset API state on logout
+          } catch (err) {
+            console.error('Logout failed: ', err);
+          }
+        },
       }),
-
       profile: builder.mutation({
-      query: data => ({
-        url: `${USERS_URL}/profile`,
-        method: "PUT",
-        body: data,
-      })
+        query: data => ({
+          url: `${USERS_URL}/profile`,
+          method: "PUT",
+          body: data,
+        })
       }),
-
       getUsers: builder.query({
         query: () => ({
             url: `${USERS_URL}`
@@ -45,12 +53,11 @@ export const userApiSlice = apiSlice.injectEndpoints({
             method: "DELETE"
         })
       }),
-      getUSerDetails: builder.query({
+      getUserDetails: builder.query({
         query: (id) => ({
             url: `${USERS_URL}/${id}`
         }),
         keepUnusedDataFor: 5,
-        
       }),
       updateUser: builder.mutation({
         query: data => ({
@@ -63,13 +70,13 @@ export const userApiSlice = apiSlice.injectEndpoints({
     }),
 });
 
-
-export const { useLoginMutation,
-    useLogoutMutation,
-    useRegisterMutation,
-    useProfileMutation,
-    useGetUsersQuery,
-    useDeleteUserMutation,
-    useGetUserDetailsQuery,
-    useUpdateUserMutation
+export const { 
+  useLoginMutation,
+  useLogoutMutation,
+  useRegisterMutation,
+  useProfileMutation,
+  useGetUsersQuery,
+  useDeleteUserMutation,
+  useGetUserDetailsQuery,
+  useUpdateUserMutation 
 } = userApiSlice;

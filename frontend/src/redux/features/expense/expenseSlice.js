@@ -21,9 +21,14 @@ const expenseSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
+    resetExpenses: (state) => {
+      state.expenses = [];  // Limpia la lista de gastos
+      state.loading = false;
+      state.error = null;
+    },
   },
 });
 
-export const { setExpenses, setLoading, setError } = expenseSlice.actions;
+export const { setExpenses, setLoading, setError, resetExpenses } = expenseSlice.actions;
 
 export default expenseSlice.reducer;

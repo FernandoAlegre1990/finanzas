@@ -33,6 +33,11 @@ const ExpenseSchema = new mongoose.Schema({
         maxLength: 100,
         trim: true,
     },
+    userId: { // Añadir el campo userId
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User', // Referencia al modelo User
+    }
 }, { timestamps: true });
 
 export default mongoose.model('Expense', ExpenseSchema);

@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-const incomeSchema = new mongoose.Schema({
+
+const IncomeSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
@@ -13,7 +14,7 @@ const incomeSchema = new mongoose.Schema({
     description: {
         type: String,
         required: true,
-        maxLength: 100,  // Aumentar el valor de 20 a, por ejemplo, 100 caracteres
+        maxLength: 100, // Aumentar el valor de 20 a 100 caracteres
     },
     date: {
         type: Date,
@@ -23,6 +24,11 @@ const incomeSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    userId: { // Añadir el campo userId
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User', // Referencia al modelo User
+    }
 }, { timestamps: true });
 
-export default mongoose.model('Income', incomeSchema);
+export default mongoose.model('Income', IncomeSchema);

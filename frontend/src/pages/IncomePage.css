@@ -1,0 +1,10 @@
+.income-container {
+  background-image: url('https://images.pexels.com/photos/5980876/pexels-photo-5980876.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+  background-size: cover; /* Para que la imagen cubra todo el contenedor */
+  background-position: center; /* Centra la imagen */
+  height: 100vh; /* Asegúrate de que ocupe toda la altura de la ventana */
+  display: flex; /* Usado para centrar contenido si es necesario */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  color: white; /* Color del texto (opcional) */
+}

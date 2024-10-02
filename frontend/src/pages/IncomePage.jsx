@@ -1,19 +1,21 @@
 import React from 'react';
 import IncomeForm from '../components/IncomeForm';
 import IncomeList from '../components/IncomeList';
+import './IncomePage.css'
 
 const IncomePage = () => {
   return (
-    <div className="ml-64 p-6"> {/* Ajusta el margen izquierdo según el tamaño de tu sidebar */}
-      <h1 className="text-2xl font-bold mb-6">Página de Ingresos</h1>
-      <div className="flex space-x-8"> {/* Utiliza flexbox y añade margen entre los componentes */}
-        <div className="flex-1"> {/* Esto permite que IncomeForm ocupe el espacio disponible */}
+    <div className="income-container">
+    <div className="ml-0 md:ml-64 p-4 md:p-6 w-full">
+      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8">
+        <div className="flex-1">
           <IncomeForm />
         </div>
-        <div className="flex-1"> {/* Esto permite que IncomeList ocupe el espacio disponible */}
+        <div className="flex-1">
           <IncomeList />
         </div>
       </div>
+    </div>
     </div>
   );
 };

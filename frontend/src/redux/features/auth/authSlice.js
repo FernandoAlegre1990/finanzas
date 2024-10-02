@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { resetIncomes } from "../income/incomeSlice";
+import { resetExpenses } from "../expense/expenseSlice";
 
 const initialState = {
   userInfo: localStorage.getItem("userInfo")
@@ -14,16 +16,23 @@ const authSlice = createSlice({
       state.userInfo = action.payload;
       localStorage.setItem("userInfo", JSON.stringify(action.payload));
 
-      const expirationTime = new Date().getTime() + 30 * 24 * 60 * 60 * 1000; // 30 days
+      const expirationTime = new Date().getTime() + 30 * 24 * 60 * 60 * 1000; // 30 días
       localStorage.setItem("expirationTime", expirationTime);
     },
-    logout: (state) => {
+    logoutSuccess: (state) => {
       state.userInfo = null;
       localStorage.clear();
     },
   },
 });
 
-export const { setCredentials, logout } = authSlice.actions;
+export const { setCredentials, logoutSuccess } = authSlice.actions;
+
+// Acción thunk para manejar el logout y limpiar el estado de ingresos y gastos
+export const logout = () => (dispatch) => {
+  dispatch(logoutSuccess());    // Limpia el estado de autenticación
+  dispatch(resetIncomes());     // Limpia los ingresos
+  dispatch(resetExpenses());    // Limpia los gastos
+};
 
 export default authSlice.reducer;

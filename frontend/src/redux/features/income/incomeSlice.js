@@ -1,8 +1,10 @@
+import { createSlice } from '@reduxjs/toolkit';
+
 const initialState = {
   incomes: [],
   loading: false,
   error: null,
-  success: false,  // Nuevo estado
+  success: false,
 };
 
 const incomeSlice = createSlice({
@@ -12,21 +14,28 @@ const incomeSlice = createSlice({
     setIncomes: (state, action) => {
       state.incomes = action.payload;
       state.loading = false;
-      state.success = true;  // Marca la operación como exitosa
+      state.success = true;
     },
     setLoading: (state, action) => {
       state.loading = action.payload;
-      state.success = false;  // Resetea el estado de éxito cuando se cargue
+      state.success = false;
     },
     setError: (state, action) => {
       state.error = action.payload;
       state.loading = false;
-      state.success = false;  // Resetea el éxito en caso de error
+      state.success = false;
     },
     clearSuccess: (state) => {
-      state.success = false;  // Limpiar el estado success
+      state.success = false;
+    },
+    resetIncomes: (state) => {
+      state.incomes = [];  // Limpia la lista de ingresos
+      state.loading = false;
+      state.error = null;
     },
   },
 });
 
-export const { setIncomes, setLoading, setError, clearSuccess } = incomeSlice.actions;
+export const { setIncomes, setLoading, setError, clearSuccess, resetIncomes } = incomeSlice.actions;
+
+export default incomeSlice.reducer;
