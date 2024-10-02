@@ -15,9 +15,21 @@ connectDB();
 const app = express();
 
 app.use(cors({
-  origin: 'https://finanzas-frontend-no0l.onrender.com',
-  credentials: true,
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      'http://localhost:5173',  // Para desarrollo local
+      'https://finanzas-frontend-no0l.onrender.com'  // Para producción
+    ];
+
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,  // Permitir el envío de cookies o cabeceras de autenticación
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
